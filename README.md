@@ -1,6 +1,6 @@
 # 🛡️ SOC Copilot — AI-Powered Security Log Investigation Agent
 
-> **Microsoft Agents League Hackathon** | Reasoning Agents Track
+> **🏆 Microsoft Agents League Hackathon Project** | Reasoning Agents Track
 
 SOC Copilot is a cybersecurity-focused reasoning agent that helps Security Operations Center (SOC) analysts investigate Windows Security Event Logs. The application analyzes security events, assesses threat severity, maps activity to MITRE ATT&CK techniques, identifies suspicious behavior, and generates actionable investigation recommendations.
 
