@@ -2,7 +2,7 @@
 
 > **Microsoft Agents League Hackathon** | Reasoning Agents Track
 
-A beginner-friendly web application that acts as an AI Security Operations Center (SOC) analyst. Upload Windows Security Event Logs, and SOC Copilot uses Claude AI to explain what happened, assess threats, map to MITRE ATT&CK, and recommend investigation steps — all in plain English.
+SOC Copilot is a cybersecurity-focused reasoning agent that helps Security Operations Center (SOC) analysts investigate Windows Security Event Logs. The application analyzes security events, assesses threat severity, maps activity to MITRE ATT&CK techniques, identifies suspicious behavior, and generates actionable investigation recommendations.
 
 ---
 
@@ -12,7 +12,7 @@ Security logs are complex and cryptic. Beginner SOC analysts often spend hours t
 
 **SOC Copilot bridges that gap** by combining:
 - **Rule-based severity scoring** — Fast, deterministic analysis of event types
-- **AI reasoning (Claude API)** — Human-readable explanations and multi-step investigation guidance
+- **AI-Powered Security Reasoning** — Human-readable explanations and multi-step investigation guidance
 - **MITRE ATT&CK mapping** — Connect events to the global adversary behavior framework
 - **Threat Hunt engine** — Automated pattern detection for brute force, privilege escalation, and more
 
@@ -23,7 +23,7 @@ Security logs are complex and cryptic. Beginner SOC analysts often spend hours t
 | Feature | Description |
 |---|---|
 | 📤 Log Upload | Upload JSON or CSV Windows Security Event logs |
-| 🤖 AI Analysis | Per-event AI explanations using Claude Sonnet |
+| 🤖 AI Analysis | AI-powered event analysis with threat assessment and investigation guidance |
 | 🎯 Severity Scoring | Automatic 0–100 scoring with Critical/High/Medium/Low/Informational levels |
 | 🗺️ MITRE ATT&CK | Maps each event to ATT&CK technique ID, name, tactic, and description |
 | 🔍 Threat Hunt | One-click scan for brute force, privilege escalation, and suspicious processes |
@@ -46,66 +46,83 @@ Security logs are complex and cryptic. Beginner SOC analysts often spend hours t
 ## 🚀 Installation & Running (Windows 11)
 
 ### Prerequisites
-- Python 3.12 or higher — [download](https://www.python.org/downloads/)
-- An Anthropic API key — [get one here](https://console.anthropic.com/)
 
-### Step 1 — Clone or Download
-```
-Download and extract the soc-copilot folder to your Desktop or any directory.
+- Python 3.12 or higher
+- Windows 10/11
+
+### Step 1 — Download the Project
+
+Clone or download the repository:
+
+```bash
+git clone <repository-url>
+cd soc-copilot
 ```
 
-### Step 2 — Open Terminal
-```
-Press Win + R, type cmd, press Enter.
-cd path\to\soc-copilot
-```
-Or right-click the folder in Explorer → "Open in Terminal"
+Or download the ZIP file and extract it to your preferred location.
 
-### Step 3 — Create a Virtual Environment
+### Step 2 — Create a Virtual Environment
+
 ```bash
 python -m venv venv
+```
+
+Activate the environment:
+
+```powershell
 venv\Scripts\activate
 ```
-You should see `(venv)` appear in your terminal prompt.
 
-### Step 4 — Install Dependencies
+### Step 3 — Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 5 — Set Your API Key
+### Step 4 — Launch SOC Copilot
 
-**Windows (Command Prompt):**
-```cmd
-set ANTHROPIC_API_KEY=sk-ant-your-key-here
-```
+#### Option A — Manual Start
 
-**Windows (PowerShell):**
-```powershell
-$env:ANTHROPIC_API_KEY = "sk-ant-your-key-here"
-```
-
-> **Note:** If you don't have an API key, the app still works! It uses a built-in rule-based fallback engine for all analysis. The fallback provides detailed, educational explanations — perfect for demos.
-
-### Step 6 — Run the App
 ```bash
 python app.py
 ```
 
 You should see:
-```
+
+```text
 ============================================================
   SOC Copilot — AI Security Log Investigation Agent
   Starting server at http://127.0.0.1:5000
 ============================================================
 ```
 
-### Step 7 — Open in Browser
-Navigate to: **http://127.0.0.1:5000**
+#### Option B — One-Click Start (Windows)
 
-Click **"Try Sample Logs"** to immediately see a full demo with a simulated attack scenario.
+SOC Copilot includes a Windows launcher:
 
----
+```text
+start_soc_copilot.bat
+```
+
+Simply double-click the file to:
+
+- Open the project directory
+- Activate the virtual environment
+- Start the Flask application automatically
+
+### Step 5 — Open the Application
+
+Open your browser and navigate to:
+
+```text
+http://127.0.0.1:5000
+```
+
+Click **"Try Sample Logs"** to explore a simulated attack scenario and view the complete investigation workflow.
+
+### Optional: AI Integration
+
+SOC Copilot supports AI-powered event analysis and investigation guidance. If an external AI service is configured, the application can provide enhanced security reasoning. Core functionality remains available through the built-in analysis engine.
 
 ## 📁 Project Structure
 
@@ -113,7 +130,7 @@ Click **"Try Sample Logs"** to immediately see a full demo with a simulated atta
 soc-copilot/
 │
 ├── app.py                  ← Flask web server, API endpoints
-├── analyzer.py             ← AI reasoning engine (Claude API + fallback)
+├── analyzer.py             ← AI reasoning engine 
 ├── mitre_mapping.py        ← MITRE ATT&CK technique lookup table
 ├── severity_engine.py      ← Severity scoring (0–100) with context analysis
 ├── report_generator.py     ← Security report and checklist generator
@@ -121,15 +138,11 @@ soc-copilot/
 ├── requirements.txt        ← Python dependencies
 ├── README.md               ← This file
 │
-├── templates/
-│   └── index.html          ← Single-page web interface (Bootstrap 5)
+├── index.html             ← Web application user interface
 │
-├── static/                 ← Static assets (CSS/JS if needed)
+├── windows_security_events.json  ← Sample Windows Security Event logs
 │
-├── sample_logs/
-│   └── windows_security_events.json  ← 12 sample events with a simulated attack chain
-│
-└── uploads/                ← Temporary file storage (auto-cleaned after analysis)
+└── start_soc_copilot.bat         ← One-click Windows launcher
 ```
 
 ---
@@ -149,16 +162,13 @@ SOC Copilot demonstrates **multi-step AI reasoning** by chaining these steps for
 3. MITRE ATT&CK Mapping
    └─ Map Event ID → Technique ID, Name, Tactic, Description
 
-4. Claude AI Prompt
-   └─ Send structured context to Claude Sonnet
-      - Event details
-      - Pre-calculated severity
-      - MITRE context
-   └─ Claude returns JSON with:
-      - summary, security_explanation, threat_assessment
-      - investigation_steps (3 steps)
-      - remediation actions
-      - analyst_tip
+4. AI-Powered Security Analysis
+   └─ Generate:
+      - Event summary
+      - Threat assessment
+      - Security explanation
+      - Investigation recommendations
+      - Remediation guidance
 
 5. Threat Hunt (on demand)
    └─ Pattern analysis across ALL events:
@@ -227,8 +237,10 @@ SOC Copilot demonstrates reasoning agents by:
 
 ## 📜 License
 
-MIT License — free to use, modify, and distribute for educational purposes.
+This project is released under the MIT License.
 
 ---
 
-*Built with Flask + Claude AI + Bootstrap 5 | For educational and demonstration purposes*
+*Built with Python, Flask, and Bootstrap 5.*
+
+*Developed for cybersecurity education and security operations research.*
