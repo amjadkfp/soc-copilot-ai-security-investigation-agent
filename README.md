@@ -198,13 +198,13 @@ This mirrors real-world attack patterns mapped to the MITRE ATT&CK framework.
 
 > *(Screenshots would be added here for the hackathon submission)*
 
-| Screen | Description |
-|---|---|
-| Welcome Screen | Dark terminal-themed landing with ASCII art |
-| Event Analysis | Per-event AI analysis with severity badges |
-| Threat Hunt | Automated pattern detection results |
-| Report View | Investigation checklist and remediation guide |
-| MITRE ATT&CK | Technique cards with links to official MITRE site |
+| Screen | Preview | Description |
+|---|---|---|
+| Welcome Screen | ![Welcome](welcome.png) | Dark terminal-themed landing with ASCII art |
+| Event Analysis | ![Analysis](analysis.png) | Per-event AI analysis with severity badges |
+| Threat Hunt | ![Threat Hunt](threat-hunt.png) | Automated pattern detection results |
+| Report View | ![Report](report.png) | Investigation checklist and remediation guide |
+| MITRE ATT&CK | ![MITRE](mitre.png) | Technique cards with links to official MITRE site |
 
 ---
 
