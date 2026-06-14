@@ -196,7 +196,7 @@ This mirrors real-world attack patterns mapped to the MITRE ATT&CK framework.
 
 ## 🖼️ Screenshots
 
-> *(Screenshots would be added here for the hackathon submission)*
+
 
 | Screen | Preview | Description |
 |---|---|---|
