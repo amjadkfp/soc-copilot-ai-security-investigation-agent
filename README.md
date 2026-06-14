@@ -138,9 +138,10 @@ soc-copilot/
 ├── requirements.txt        ← Python dependencies
 ├── README.md               ← This file
 │
-├── index.html             ← Web application user interface
-│
-├── windows_security_events.json  ← Sample Windows Security Event logs
+├── templates/
+│   └── index.html          ← Web application user interface
+│── sample_logs/
+│    └── windows_security_events.json  ← Sample Windows Security Event logs
 │
 └── start_soc_copilot.bat         ← One-click Windows launcher
 ```
